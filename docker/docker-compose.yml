@@ -1,0 +1,15 @@
+version: "3.8"
+services:
+  mongo:
+    image: mongo:4.4.17
+    restart: always
+    ports:
+      - 9025:27017
+    command: --replSet rs0
+    volumes:
+      - ./mongo-rs-init.js:/docker-entrypoint-initdb.d/init.js:ro
+      - mongo-config:/data/configdb
+      - mongo-data:/data/db
+volumes:
+  mongo-config:
+  mongo-data:
